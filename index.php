@@ -8,38 +8,45 @@ include ('header.php');
       <div style="background-color: rgba(0, 0, 0, 0.6);>
         <div class="d-flex justify-content-center align-items-center h-100">
           <div class="text-white">
-            <h1 class="mb-3 m-3 p-4">Bienvenue chez Mafasa</h1>
+            <h1 class="mb-3 m-3 p-4 title">Bienvenue chez Mafasa</h1>
             <h2 class="mb-3 p-3">Votre amie dans la cuisine</h2>
-          
           </div>
         </div>
   </div>
 
 <?php
 //get top 5 recettes
-$firstpage = $bdd->query("SELECT * FROM recettes ORDER BY 'publishdate' ASC LIMIT 5");
+$firstpage = $bdd->query("SELECT * FROM recepies ORDER BY 'publishdate' ASC LIMIT 5");
 
 
 ?>
-<?='<div class="row row-cols-3 card-deck ">';?>
-
+<?='<div class="row card-deck ">';?>
+<h1 class="text-center">Nos derniers suggestions</h1>
+<section class="container-fluid">
+<div class="row">
+      
 <?php
 while($donnees = $firstpage->fetch()) {
     // $text = nl2br($donnees['description']);
     $textcard = substr($donnees['description'], 0, 150);
 ?>
-                <div class="card overflow-auto overflow-hidden">
-                    <img src="<?php echo $donnees['image'];?>" class="card-img-top" alt="Plat">
-                    <div class="card-body">
-                        <h2 class="card-title"><?php echo $donnees['title'];?></h2>
-                        <p class="card-text"><?php echo $textcard;?></p>
-                        <a href="article.php?id=<?php echo $donnees['id'];?>" class="btn btn color-C59D44">Plus d'infos</a>
-                    </div>
-                </div>    
-<?php } ?>            
+            <div class="col-6">
+              <div class="card overflow-auto overflow-hidden">
+                <img src="<?php echo $donnees['image'];?>" class="card-img-top" alt="Plat">
+                <div class="card-body">
+                    <h2 class="card-title"><?php echo $donnees['title'];?></h2>
+                    <p class="card-text"><?php echo $textcard;?></p>
+                    <a href="article.php?id=<?php echo $donnees['id'];?>" class="btn btn color-C59D44">Plus d'infos</a>
+                </div> 
+              </div>
+            </div>  
+<?php } ?> 
+        
+</div> 
+</section>           
 
 <?='</div>';?>
-</section>
+
 <?php
 include('footer.php');
 
